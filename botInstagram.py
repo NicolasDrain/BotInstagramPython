@@ -34,6 +34,7 @@ def getFollowersOfAccount(driver, account) :
     time.sleep(2)
     getFollowersButton.click()
     time.sleep(2)
+    #Recherche d'un moyen de scroll tout en bas des abonnés.
 
 
 driver = webdriver.Firefox(executable_path="geckodriver.exe")    
