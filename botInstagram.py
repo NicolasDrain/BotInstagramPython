@@ -32,7 +32,8 @@ def goToAnAccount(account, driver) :
 def getFollowersOfAccount(driver, account, numberFollowers) :
     goToAnAccount(account,driver)
     time.sleep(2)
-    getFollowersButton = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/div")
+    #getFollowersButton = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/div")
+    getFollowersButton = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/main/div/header/section/ul/li[2]/a/div")   
     time.sleep(2)
     getFollowersButton.click()
     time.sleep(2)
@@ -57,35 +58,38 @@ def getFollowersOfAccount(driver, account, numberFollowers) :
 def sub(L,driver) :
     for i in L :
         user=i
-        time.sleep(4)
+        time.sleep(1)
         driver.get("https://www.instagram.com/"+user+"/")
-        time.sleep(4)
+        time.sleep(3)
         try :
             alreadySubscribe = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button/div/div/span")
             print("Déjà abonné à ce compte")
         except :
             try :
-                isPrivate = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/article/div[1]/div/h2")
-                subscribeButton = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div[1]/div/div/button")
+                isPrivate = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/main/div/div/article/div[1]/div/h2")
+                #subscribeButton = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div[1]/div/div/button")
+                subscribeButton = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/main/div/header/section/div[1]/div[1]/div/div/button")
                 subscribeButton.click
                 print("Ce compte est en privé")
-                time.sleep(2)
+                time.sleep(0.5)
             except :
-                subscribeButton = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div[1]/div/div/div/span/span[1]/button")
+                #subscribeButton = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div[1]/div/div/div/span/span[1]/button")
+                subscribeButton = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/main/div/header/section/div[1]/div[1]/div/div/div/span/span[1]/button")
                 print("Ce compte est en public")
-                time.sleep(2)
+                time.sleep(0.5)
             subscribeButton.click()
             
 
 
 
 driver = webdriver.Firefox(executable_path="geckodriver.exe")    
-username = "comptewish10nicolas@gmail.com"
-username1 ="lalaya3137@bepureme.com"
-password = "BgDu02600123"
-driver = loginToInstagram(username1, password, driver)
-account = "caminotv"
-listFollowers = getFollowersOfAccount(driver, account, 5)
+username = ""
+username1 =""
+username3=""
+password = ""
+driver = loginToInstagram(username3, password, driver)
+account = "parisjetaime"
+listFollowers = getFollowersOfAccount(driver, account, 400)
 sub(listFollowers, driver)
 #récupérer la taille d'un élément sizePageFollowers = pageFollowers.size['height']
 
