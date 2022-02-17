@@ -38,9 +38,9 @@ def getFollowersOfAccount(driver, account) :
 
 
 driver = webdriver.Firefox(executable_path="geckodriver.exe")    
-username = "comptewish10nicolas@gmail.com"
-username1 ="lalaya3137@bepureme.com"
-password = "BgDu02600123"
+username = ""
+username1 =""
+password = ""
 driver = loginToInstagram(username1, password, driver)
 account = "nicodrain"
 getFollowersOfAccount(driver, account)
