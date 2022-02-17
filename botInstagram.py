@@ -26,7 +26,7 @@ def schearchOnInstagram(driver,manga) :
     driver.get("https://www.instagram.com/explore/tags/"+manga+"/")
     time.sleep(4)
 
-def getFollowersOfAccount(driver, account) :
+def getFollowersOfAccount(driver, account, numberFollowers) :
     time.sleep(4)
     driver.get("https://www.instagram.com/"+account+"/")
     time.sleep(2)
@@ -34,18 +34,29 @@ def getFollowersOfAccount(driver, account) :
     time.sleep(2)
     getFollowersButton.click()
     time.sleep(2)
-    #Recherche d'un moyen de scroll tout en bas des abonnés.
-    for i in range(1,10,1) :
-        b=str(i)
-        abo = driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div[2]/ul/div/li["+b+"]/div/div[2]/div/div/div/span/a/span").text
-        print(abo)
+    #Scroll down dans les abonnés
+    pageFollowers = driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div[2]")
+    time.sleep(2)
+    for j in range(round(numberFollowers/10)) :
+        driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", pageFollowers)
         time.sleep(1)
+    #Permet de récupérer les abonnés
+    time.sleep(4)
+    count=0
+    for i in range(1,numberFollowers+1,1) :
+        abo = driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div[2]/ul/div/li["+str(i)+"]/div/div[1]/div[2]/div[1]/span/a/span").text
+        print(abo)
+        time.sleep(0.2)
+        count=count+1
+        print(count)    
+
 
 
 driver = webdriver.Firefox(executable_path="geckodriver.exe")    
 username = "comptewish10nicolas@gmail.com"
 username1 ="lalaya3137@bepureme.com"
 password = "BgDu02600123"
-driver = loginToInstagram(username1, password, driver)
+driver = loginToInstagram(username, password, driver)
 account = "nicodrain"
-getFollowersOfAccount(driver, account)
+getFollowersOfAccount(driver, account, 179)
+#récupérer la taille d'un élément sizePageFollowers = pageFollowers.size['height']
