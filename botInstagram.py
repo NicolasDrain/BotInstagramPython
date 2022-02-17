@@ -35,12 +35,17 @@ def getFollowersOfAccount(driver, account) :
     getFollowersButton.click()
     time.sleep(2)
     #Recherche d'un moyen de scroll tout en bas des abonnés.
+    for i in range(1,10,1) :
+        b=str(i)
+        abo = driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div[2]/ul/div/li["+b+"]/div/div[2]/div/div/div/span/a/span").text
+        print(abo)
+        time.sleep(1)
 
 
 driver = webdriver.Firefox(executable_path="geckodriver.exe")    
-username = ""
-username1 =""
-password = ""
+username = "comptewish10nicolas@gmail.com"
+username1 ="lalaya3137@bepureme.com"
+password = "BgDu02600123"
 driver = loginToInstagram(username1, password, driver)
 account = "nicodrain"
 getFollowersOfAccount(driver, account)
