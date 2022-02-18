@@ -21,33 +21,33 @@ def loginToInstagram(username, password, driver):
     time.sleep(4)
     return driver
 
-def schearchOnInstagram(driver,manga) :
+def schearchOnInstagram(driver,manga):
     time.sleep(4)
-    driver.get("https://www.instagram.com/explore/tags/"+manga+"/")
+    driver.get(f'https://www.instagram.com/explore/tags/{manga}/')
     time.sleep(4)
-def goToAnAccount(account, driver) :
+def goToAnAccount(account, driver):
     time.sleep(4)
-    driver.get("https://www.instagram.com/"+account+"/")
+    driver.get(f'https://www.instagram.com/{account}/')
 
-def getFollowersOfAccount(driver, account, numberFollowers) :
+def getFollowersOfAccount(driver, account, numberFollowers):
     goToAnAccount(account,driver)
     time.sleep(2)
     #getFollowersButton = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/div")
-    getFollowersButton = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/main/div/header/section/ul/li[2]/a/div")   
+    getFollowersButton = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/main/div/header/section/ul/li[2]/a/div")
     time.sleep(2)
     getFollowersButton.click()
     time.sleep(2)
     #Scroll down dans les abonnés
     pageFollowers = driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div[2]")
     time.sleep(2)
-    for j in range(round((numberFollowers/10)+1)) :
+    for _ in range(round((numberFollowers/10)+1)):
         driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", pageFollowers)
         time.sleep(1)
     #Permet de récupérer les abonnés
     time.sleep(4)
     count=0
     listFollowers=[]
-    for i in range(1,numberFollowers+1,1) :
+    for i in range(1, numberFollowers+1):
         abo = driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div[2]/ul/div/li["+str(i)+"]/div/div[1]/div[2]/div[1]/span/a/span").text
         print(abo)
         time.sleep(0.2)
@@ -55,11 +55,11 @@ def getFollowersOfAccount(driver, account, numberFollowers) :
     return listFollowers   
 
 #fonction pour s'abonner aux comptes
-def sub(L,driver) :
-    for i in L :
+def sub(L,driver):
+    for i in L:
         user=i
         time.sleep(1)
-        driver.get("https://www.instagram.com/"+user+"/")
+        driver.get(f'https://www.instagram.com/{user}/')
         time.sleep(3)
         try :
             alreadySubscribe = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button/div/div/span")
